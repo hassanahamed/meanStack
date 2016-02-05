@@ -7,9 +7,7 @@ var db = mongojs('contactList', ['contactList']);
 
 
 
-/*emailExistence.check('sdklfjvksd@gmail.com', function(err,res){
-		console.log('res: '+res);
-	});*/
+
 
 
 
@@ -44,14 +42,26 @@ app.get('/contactList/:id', function(req, res) {
 });
 
 
-app.post('/contactList', function(req, res) {
+app.post('/contactList', function(req, parentRes) {
 
-    console.log(req.body);
-    db.contactList.insert(req.body, function(err, doc) {
-        res.json(doc);
+    console.log('heyy'+ req.body.email);
+
+    var emailCheck = req.body.email;
+    emailExistence.check(emailCheck, function(err,res){
+		console.log('res: '+res);
+		if(res){
+
+			 db.contactList.insert(req.body, function(err, doc) {
+        parentRes.json(doc);
         console.log('here', +doc);
 
     });
+		} else{
+			parentRes.status(400).send('Bad Request');
+				
+		}
+	});
+   
 
 });
 

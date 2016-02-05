@@ -19,11 +19,16 @@ angular.module('contacts')
         $scope.addContact = function() {
 
             console.log($scope.contact);
-            $http.post('/contactList', $scope.contact).success(function(response) {
+            $http.post('/contactList', $scope.contact)
+            			.success(function(response) {
+			                console.log(response);
+                			refresh();
+            })			.error(function(response){
 
+            	console.log('got here in failure callback from server' + response);
+            	alert("this email id does not exists");
+            	$scope.contact.email = '';
 
-                console.log(response);
-                refresh();
             });
 
 

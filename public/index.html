@@ -16,18 +16,25 @@
 <div class = "container">
 
 <h1>contacts list</h1>
+<form name="myForm" >
 		<table class = "table">
 		<thead>
 		<tr>
-			<th>Name</th>
-			<th>Email</th>
+			<th> Name</th>
+			<th><div role="alert">
+			<span style="color:red" class="error" ng-show="myForm.input.$error.required">
+       		Required!</span>
+      		<span style="color:red" class="error" ng-show="myForm.input.$error.email">
+        Not valid email!</span>
+        </div>Email </th>
 			<th>Number</th>
 			<th>Action</th>
 		</tr>
 		</thead>
 		<tbody>
 			<td> <input class = 'form-control' ng-model = 'contact.name'></td>
-			<td> <input class = 'form-control' ng-model = 'contact.email'></td>
+			<td> <input  type = 'email' class = 'form-control' name = 'input' ng-model = 'contact.email' required></td>
+			 
 			<td> <input class = 'form-control' ng-model = 'contact.number'></td>
 			<td> <button class = 'btn btn-primary' ng-click = 'addContact()'>ADD CONTACT </button></td>
 			<td> <button class = 'btn btn-info' ng-click = 'update()'>UPDATE </button></td>
@@ -40,7 +47,9 @@
 			</tr>
 		</tbody>>
 		</table>
-		
+
+
+	</form>
 			
 </div>
 
